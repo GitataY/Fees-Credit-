@@ -30,6 +30,10 @@ Product decisions / requirements
   ┌─────────────────────┐
   │  UI Spec            │  →  ui-specs/[name].md  (UI Spec)
   │  Designer           │
+  └────────┬────────────┘
+           ↓
+  ┌─────────────────────┐
+  │  Pencil Designer    │  →  designs/[name].pen  (Pencil.dev Design)
   └─────────────────────┘
 ```
 
@@ -46,6 +50,9 @@ Reads the Feature Spec and produces a **User Journey** (`journeys/`) — a step-
 ### Stage 3 — UI Spec Designer
 Reads the User Journey and produces a **UI Spec** (`ui-specs/`) — a screen-by-screen specification with layout intent, component inventory, component states, exact micro-copy, and screen transitions. Written precisely enough that a UI designer can open it and build in Figma without asking a single question.
 
+### Stage 4 — Pencil Designer
+Reads the UI Spec and produces a **Pencil.dev design file** (`designs/[name].pen`) — the visual implementation of every screen and component state defined in the UI Spec, built in [Pencil.dev](https://pencil.evolus.vn/).
+
 ---
 
 ## Directory Structure
@@ -61,7 +68,8 @@ pm-agentic-workflow/
 ├── features/                ← Stage 1 output: Feature Specs
 ├── specs/                   ← Stage 1 output: BDD Specs
 ├── journeys/                ← Stage 2 output: User Journey narratives
-└── ui-specs/                ← Stage 3 output: UI Specifications
+├── ui-specs/                ← Stage 3 output: UI Specifications
+└── designs/                 ← Stage 4 output: Pencil.dev design files (.pen)
 ```
 
 ---
@@ -75,6 +83,7 @@ features/1.0.1-customer-registration.md
 specs/1.0.1-customer-registration.md
 journeys/1.0.1-customer-registration.md
 ui-specs/1.0.1-customer-registration.md
+designs/1.0.1-customer-registration.pen
 ```
 
 This makes tracing any screen or behavior back to its origin spec a single lookup.
@@ -86,10 +95,10 @@ This makes tracing any screen or behavior back to its origin spec a single looku
 Two layers ensure downstream files never silently drift from their feature source:
 
 ### 1. CLAUDE.md Rule (AI-initiated edits)
-Whenever a `features/*.md` file is modified by an AI agent, it automatically checks for and updates all corresponding downstream files in the same operation. Changes are never considered done until all downstream files are in sync.
+Whenever a `features/*.md` file is modified by an AI agent, it automatically checks for and updates all corresponding downstream markdown files in the same operation. If a `designs/[name].pen` file exists, the agent flags it to the user — `.pen` files cannot be auto-edited and must be updated manually in Pencil.dev. Changes are never considered done until all downstream files are in sync.
 
 ### 2. Git Pre-commit Hook (manual edits)
-When you commit changes that include `features/*.md`, the hook detects which downstream files exist but are not staged, and blocks the commit with a warning:
+When you commit changes that include `features/*.md` or `ui-specs/*.md`, the hook detects which downstream files exist but are not staged, and blocks the commit with a warning:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -101,6 +110,7 @@ When you commit changes that include `features/*.md`, the hook detects which dow
 
   specs/1.0.1-customer-registration.md
   journeys/1.0.1-customer-registration.md
+  designs/1.0.1-customer-registration.pen  (Pencil.dev — update manually)
 ```
 
 To bypass intentionally: `git commit --no-verify`
@@ -112,4 +122,5 @@ To bypass intentionally: `git commit --no-verify`
 1. **Start with a feature** — give the Specs Writer agent your product requirements. It produces the Feature Spec first, BDD spec second.
 2. **Run the journey** — give the UX Journey Designer the Feature Spec. It maps every actor flow into a human narrative.
 3. **Spec the UI** — give the UI Spec Designer the journey. It produces a screen-by-screen spec ready for Figma.
-4. **Commit** — the pre-commit hook ensures you don't drift.
+4. **Design it** — open the UI Spec in Pencil.dev and build the visual design. Save as `designs/[name].pen`.
+5. **Commit** — the pre-commit hook ensures you don't drift.
