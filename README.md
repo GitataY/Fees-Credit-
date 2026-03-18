@@ -15,7 +15,11 @@ The agents don't write code — they write the specifications, user journeys, an
 ## The Pipeline
 
 ```
-Product decisions / requirements
+Raw idea / existing context
+           ↓
+  ┌─────────────────────┐
+  │  Idea Brainstormer  │  →  brainstorms/[name].md  (Product Brief)
+  └────────┬────────────┘
            ↓
   ┌─────────────────┐
   │  Specs Writer   │  →  features/[name].md   (Feature Spec)
@@ -32,6 +36,9 @@ Product decisions / requirements
   │  Designer           │
   └─────────────────────┘
 ```
+
+### Stage 0 — Idea Brainstormer
+A conversational pre-pipeline agent that stress-tests product ideas through sharp, direct back-and-forth. Works in two modes — blank-slate exploration or validation of an existing idea — auto-detected from how the user opens the conversation. Acts as a critical co-founder: challenges assumptions, finds gaps, and holds the line on vague answers. Ends with a structured **Product Brief** (`brainstorms/`) capturing the problem, target users, value proposition, key flows, assumptions, open questions, and risks. The brief is the direct input to the Specs Writer.
 
 ### Stage 1 — Specs Writer
 Turns product decisions and requirements into two documents:
@@ -53,11 +60,12 @@ Reads the User Journey and produces a **UI Spec** (`ui-specs/`) — a screen-by-
 ```
 pm-agentic-workflow/
 ├── agents/                  ← Agent definitions
-│   ├── PIPELINE.md          ← Pipeline overview (this system)
+│   ├── idea-brainstormer.md
 │   ├── specs-writer.md
 │   ├── ux-journey-designer.md
 │   └── ui-spec-designer.md
 │
+├── brainstorms/             ← Stage 0 output: Product Briefs
 ├── features/                ← Stage 1 output: Feature Specs
 ├── specs/                   ← Stage 1 output: BDD Specs
 ├── journeys/                ← Stage 2 output: User Journey narratives
@@ -110,7 +118,8 @@ To bypass intentionally: `git commit --no-verify`
 
 ## How to Use
 
-1. **Start with a feature** — give the Specs Writer agent your product requirements. It produces the Feature Spec first, BDD spec second.
-2. **Run the journey** — give the UX Journey Designer the Feature Spec. It maps every actor flow into a human narrative.
-3. **Spec the UI** — give the UI Spec Designer the journey. It produces a screen-by-screen spec ready for Figma.
-4. **Commit** — the pre-commit hook ensures you don't drift.
+1. **Brainstorm** — start a conversation with the Idea Brainstormer. Bring a raw idea or a half-formed concept. It will stress-test it and produce a Product Brief in `brainstorms/`.
+2. **Spec the feature** — give the Specs Writer the Product Brief. It produces the Feature Spec first, BDD spec second.
+3. **Run the journey** — give the UX Journey Designer the Feature Spec. It maps every actor flow into a human narrative.
+4. **Spec the UI** — give the UI Spec Designer the journey. It produces a screen-by-screen spec ready for Figma.
+5. **Commit** — the pre-commit hook ensures you don't drift.
