@@ -11,11 +11,12 @@ Whenever a `features/*.md` file is modified (by you or the user), immediately an
 
 ## Pipeline Stage Order
 
-The full order is: `brainstorms/` → `features/` → `specs/` → `journeys/` → `ui-specs/`
+The pipeline runs in strict order: `features/` → `specs/` → `journeys/` → `ui-specs/`
 
-- `brainstorms/` is the pre-pipeline stage — produced by the Idea Brainstormer agent through conversation. Output files are `.md` briefs that feed into the Specs Writer.
 - Never skip a stage. If asked to produce a file at stage N but the stage N-1 file doesn't exist yet, create the missing upstream file first.
 - Example: asked to write a UI spec but no journey file exists → write the journey first, then the UI spec.
+
+`brainstorms/` is independent — it is not part of the pipeline. Files there are free-form working documents. The user decides when one is ready and hands it to the Specs Writer manually. Never auto-cascade from or into `brainstorms/`.
 
 ## File Naming Convention
 

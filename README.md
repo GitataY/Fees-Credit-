@@ -15,11 +15,7 @@ The agents don't write code — they write the specifications, user journeys, an
 ## The Pipeline
 
 ```
-Raw idea / existing context
-           ↓
-  ┌─────────────────────┐
-  │  Idea Brainstormer  │  →  brainstorms/[name].md  (Product Brief)
-  └────────┬────────────┘
+Product decisions / requirements
            ↓
   ┌─────────────────┐
   │  Specs Writer   │  →  features/[name].md   (Feature Spec)
@@ -36,9 +32,6 @@ Raw idea / existing context
   │  Designer           │
   └─────────────────────┘
 ```
-
-### Stage 0 — Idea Brainstormer
-A conversational pre-pipeline agent that stress-tests product ideas through sharp, direct back-and-forth. Works in two modes — blank-slate exploration or validation of an existing idea — auto-detected from how the user opens the conversation. Acts as a critical co-founder: challenges assumptions, finds gaps, and holds the line on vague answers. Ends with a structured **Product Brief** (`brainstorms/`) capturing the problem, target users, value proposition, key flows, assumptions, open questions, and risks. The brief is the direct input to the Specs Writer.
 
 ### Stage 1 — Specs Writer
 Turns product decisions and requirements into two documents:
@@ -65,7 +58,7 @@ pm-agentic-workflow/
 │   ├── ux-journey-designer.md
 │   └── ui-spec-designer.md
 │
-├── brainstorms/             ← Stage 0 output: Product Briefs
+├── brainstorms/             ← Independent: Product Briefs (not part of pipeline)
 ├── features/                ← Stage 1 output: Feature Specs
 ├── specs/                   ← Stage 1 output: BDD Specs
 ├── journeys/                ← Stage 2 output: User Journey narratives
@@ -87,6 +80,22 @@ ui-specs/1.0.1-customer-registration.md
 ```
 
 This makes tracing any screen or behavior back to its origin spec a single lookup.
+
+---
+
+## Idea Brainstormer — Independent Tool
+
+The **Idea Brainstormer** (`agents/idea-brainstormer.md`) sits outside the pipeline. It is a conversational agent — you chat with it to explore or stress-test a product idea, and it produces a structured **Product Brief** saved in `brainstorms/`.
+
+- `brainstorms/` is a free-form workspace. Multiple briefs can live there at any time, at any stage of maturity.
+- Files are not auto-cascaded and are not covered by the pre-commit hook.
+- When you're happy with a brief and ready to build, you hand it to the Specs Writer manually to kick off the pipeline.
+
+The agent works in two modes — detected automatically from how you open the conversation:
+- **Blank slate** — you have a raw idea, it helps you shape it
+- **Existing context** — you bring something formed, it pokes holes and finds gaps
+
+It acts as a critical co-founder: challenges assumptions, holds the line on vague answers, and won't let you skip past a weak problem definition.
 
 ---
 
@@ -118,8 +127,11 @@ To bypass intentionally: `git commit --no-verify`
 
 ## How to Use
 
-1. **Brainstorm** — start a conversation with the Idea Brainstormer. Bring a raw idea or a half-formed concept. It will stress-test it and produce a Product Brief in `brainstorms/`.
-2. **Spec the feature** — give the Specs Writer the Product Brief. It produces the Feature Spec first, BDD spec second.
-3. **Run the journey** — give the UX Journey Designer the Feature Spec. It maps every actor flow into a human narrative.
-4. **Spec the UI** — give the UI Spec Designer the journey. It produces a screen-by-screen spec ready for Figma.
-5. **Commit** — the pre-commit hook ensures you don't drift.
+**Before the pipeline** (optional but recommended):
+- Start a conversation with the Idea Brainstormer. It stress-tests your idea and saves a Product Brief to `brainstorms/`. When you're satisfied with the brief, hand it to the Specs Writer to kick off the pipeline.
+
+**The pipeline:**
+1. **Spec the feature** — give the Specs Writer your requirements (or a brainstorm brief). It produces the Feature Spec first, BDD spec second.
+2. **Run the journey** — give the UX Journey Designer the Feature Spec. It maps every actor flow into a human narrative.
+3. **Spec the UI** — give the UI Spec Designer the journey. It produces a screen-by-screen spec ready for Figma.
+4. **Commit** — the pre-commit hook ensures you don't drift.
