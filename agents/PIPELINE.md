@@ -34,15 +34,6 @@ This document explains how the agents in this folder connect, what each one cons
                                       ▼
                               ui-specs/[name].md
                               (UI Spec)
-                                      │
-                                      ▼
-                        ┌─────────────────────────────┐
-                        │     pencil-designer         │
-                        └─────────────┬───────────────┘
-                                      │ produces
-                                      ▼
-                              designs/[name].pen
-                              (Pencil.dev Design)
 ```
 
 ---
@@ -78,15 +69,6 @@ This document explains how the agents in this folder connect, what each one cons
 
 ---
 
-### Stage 4 — Pencil Designer
-**File**: `pencil-designer.md`
-**Input**: `ui-specs/[name].md` (primary)
-**Produces**: `designs/[name].pen` — visual design file in Pencil.dev implementing every screen and component state defined in the UI Spec
-
-**Rule**: One `.pen` file per feature. Every screen and state in the UI Spec must have a corresponding frame in the design file.
-
----
-
 ## Directory Map
 
 ```
@@ -101,7 +83,7 @@ pm-agentic-workflow/
 ├── specs/                   ← Stage 1 output: BDD Specs
 ├── journeys/                ← Stage 2 output: User Journey narratives
 ├── ui-specs/                ← Stage 3 output: UI Specifications
-└── designs/                 ← Stage 4 output: Pencil.dev design files (.pen)
+└── designs/                 ← Pencil.dev design files (.pen) — outside the pipeline
 ```
 
 ---
@@ -115,7 +97,6 @@ features/1.0.1-customer-registration-and-auth.md   ← Feature Spec
 specs/1.0.1-customer-registration-and-auth.md       ← BDD Spec
 journeys/1.0.1-customer-registration-and-auth.md    ← User Journey
 ui-specs/1.0.1-customer-registration-and-auth.md    ← UI Spec
-designs/1.0.1-customer-registration-and-auth.pen    ← Pencil.dev Design
 ```
 
 This makes tracing any screen or behavior back to its origin spec a single lookup.
@@ -136,4 +117,3 @@ The following files in this folder are not agents — they are reference documen
 | Specs Writer | Feature + BDD specs | Product decisions | `features/`, `specs/` |
 | UX Journey Designer | User journey narratives | `features/` | `journeys/` |
 | UI Spec Designer | Screen + component specs | `journeys/` | `ui-specs/` |
-| Pencil Designer | Visual design in Pencil.dev | `ui-specs/` | `designs/` |

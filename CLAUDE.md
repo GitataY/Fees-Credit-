@@ -9,26 +9,22 @@ Whenever a `features/*.md` file is modified (by you or the user), immediately an
 
 **Never consider a feature file edit "done" until all existing downstream files are in sync.**
 
-If a corresponding `designs/[name].pen` file exists, flag it to the user — `.pen` files cannot be auto-edited and must be updated manually in Pencil.dev.
-
 ## Pipeline Stage Order
 
-The pipeline runs in strict order: `features/` → `specs/` → `journeys/` → `ui-specs/` → `designs/`
+The pipeline runs in strict order: `features/` → `specs/` → `journeys/` → `ui-specs/`
 
 - Never skip a stage. If asked to produce a file at stage N but the stage N-1 file doesn't exist yet, create the missing upstream file first.
 - Example: asked to write a UI spec but no journey file exists → write the journey first, then the UI spec.
-- `designs/` is the final stage and produces `.pen` files — these are Pencil.dev design files and cannot be written as plain text.
 
 ## File Naming Convention
 
-All files across `features/`, `specs/`, `journeys/`, `ui-specs/`, and `designs/` must share the exact same base filename.
+All files across `features/`, `specs/`, `journeys/`, and `ui-specs/` must share the exact same filename.
 
 ```
 features/1.0.1-customer-registration-and-auth.md   ← source
 specs/1.0.1-customer-registration-and-auth.md
 journeys/1.0.1-customer-registration-and-auth.md
 ui-specs/1.0.1-customer-registration-and-auth.md
-designs/1.0.1-customer-registration-and-auth.pen
 ```
 
 Never create a downstream file with a different name than its feature file.
