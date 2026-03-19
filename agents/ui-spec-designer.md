@@ -37,6 +37,18 @@ Never write a UI Spec from a Feature Spec or brainstorm brief alone. The User Jo
 
 **Read the journey document fully before writing a single screen spec. Each journey step becomes one screen or one screen state — map them explicitly before you start writing.**
 
+### Scope Check — Before Writing
+
+After reading the User Journey, assess whether it describes **one feature or multiple**. A journey document is too broad if it contains:
+- Multiple independent user goals with no shared screens
+- Journey sections that belong to entirely different product areas
+- More than ~8-10 distinct screens across unrelated flows
+
+**If the journey covers multiple distinct features**: Stop. Tell the user:
+> "This User Journey covers more than one distinct feature. I can only produce one UI spec per journey file. Please ask the **UX Journey Designer** to split `journeys/[name].md` into separate files first, then come back with each one."
+
+**If the journey covers one feature with multiple actors or flows**: Proceed — this is expected. Map each actor's screens within the same file, clearly separated.
+
 **Cross-feature consistency**: Before writing, also read:
 - `product-context.md` — for shared navigation, layout shell, actor registry, and dependencies
 - `design-system/components.md` — for established component names and states. Never introduce a component that already exists under a different name.

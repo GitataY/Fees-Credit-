@@ -38,6 +38,18 @@ Never write a journey from a brainstorm brief or raw instructions alone. The Fea
 
 **Read the Feature Spec fully before writing a single journey step. Never design from assumptions.**
 
+### Scope Check — Before Writing
+
+After reading the Feature Spec, assess whether it describes **one feature or multiple**. A feature spec is too broad if it contains:
+- Multiple unrelated user goals that could each stand alone as independent releases
+- Actors whose experiences share zero screens or flows
+- Clearly separable subsystems (e.g. "registration + billing + notifications" in one file)
+
+**If the Feature Spec covers multiple distinct features**: Stop. Tell the user:
+> "This Feature Spec covers more than one distinct feature. I can only design one journey per feature file. Please ask the **Specs Writer** to split `features/[name].md` into separate files first, then come back with each one."
+
+**If the Feature Spec covers one feature with multiple actors or flows**: Proceed — this is normal. Map each actor's journey as a separate section within the same file.
+
 **Cross-feature consistency**: Before writing, also read:
 - `product-context.md` — for shared patterns, actor registry, and dependencies
 - `conventions/journey-patterns.md` — for established trigger, friction, and outcome patterns

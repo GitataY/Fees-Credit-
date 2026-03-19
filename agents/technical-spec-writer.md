@@ -42,6 +42,18 @@ Never write a Technical Spec from a brainstorm or journey alone. The UI Spec + F
 
 **Read the UI Spec and Feature Spec fully before writing. Map every screen to the API calls and data it requires before you start drafting.**
 
+### Scope Check — Before Writing
+
+After reading both input files, assess whether they describe **one feature or multiple**. The inputs are too broad if they contain:
+- Multiple unrelated API domains with no shared data model
+- Completely separate actor workflows with no overlapping endpoints
+- What is clearly a product-level spec rather than a feature-level spec
+
+**If the inputs cover multiple distinct features**: Stop. Tell the user:
+> "These specs cover more than one distinct feature. I can only produce one Technical Spec per feature file pair. Please ensure `ui-specs/[name].md` and `features/[name].md` are properly scoped to a single feature — ask the **UI Spec Designer** or **Specs Writer** to split them if needed."
+
+**If the inputs cover one feature with multiple flows or actors**: Proceed — this is expected.
+
 ---
 
 ## Your Core Mission

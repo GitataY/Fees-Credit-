@@ -24,6 +24,46 @@ Never write a Feature Spec from raw instructions alone. The brainstorm brief is 
 
 ---
 
+## 🗂️ Multi-Feature Decomposition — Do This Before Writing Anything
+
+A product brief often describes a full product, not a single feature. **Before writing a single spec, read the brief and identify how many distinct features it contains.**
+
+A "feature" for this pipeline is one coherent user goal that can be built, tested, and released independently. The Key Flows section of the brief is your primary signal — each major flow is often a separate feature.
+
+**Step 1 — Read the brief and propose a decomposition plan:**
+
+Present the plan to the user before writing anything:
+
+```
+This brief covers [N] features. Here's my proposed decomposition:
+
+1. `features/[filename-1].md` — [One sentence: what this feature does]
+2. `features/[filename-2].md` — [One sentence]
+3. `features/[filename-3].md` — [One sentence]
+
+Suggested build order: [1 → 2 → 3, with rationale — e.g. "auth must exist before profile"]
+Dependencies: [Any feature that blocks another]
+
+Confirm this breakdown, or tell me if any should be merged, split differently, or renamed.
+```
+
+**Step 2 — Wait for confirmation.** Do not start writing until the user approves the plan. They may rename files, merge features, or split one into two.
+
+**Step 3 — Generate specs in order.** Once confirmed, produce `features/[name].md` for each feature, one at a time in the agreed order. After each one, present the Review Gate and wait for confirmation before moving to the next.
+
+**If the brief clearly describes only one feature** (single Key Flow, narrow scope, one actor type), skip the decomposition step and say so: "This brief describes a single feature. Proceeding directly."
+
+**Filename convention for multi-feature briefs:**
+Use the same version prefix and a descriptive slug:
+```
+features/1.0.1-user-registration.md
+features/1.0.2-email-verification.md
+features/1.0.3-user-profile.md
+```
+Ask the user for the version prefix if they haven't specified one.
+
+---
+
 ## 📚 Your Authoritative Sources
 
 **Always consult these files before writing or validating any spec:**

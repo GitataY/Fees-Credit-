@@ -67,10 +67,21 @@ When two features share a screen (e.g. a dashboard that surfaces data from multi
 
 ### One brainstorm → multiple features
 
-If a brainstorm produces multiple distinct features:
-1. The Specs Writer should produce separate feature specs, each with its own filename
-2. Record the relationship in `product-context.md` under Cross-Feature Dependencies
-3. Each feature proceeds through the pipeline independently
+A product brief describes a product. A product has multiple features. This is the normal case.
+
+When the Specs Writer receives a brief:
+1. It reads the brief and proposes a decomposition plan — a list of feature files with names and one-line descriptions
+2. It waits for the user to confirm (or adjust) the plan before writing anything
+3. It generates feature specs one by one in the agreed order, with a review gate after each one
+4. Each feature then proceeds through the pipeline independently
+
+Each feature's files share the same filename across all directories:
+```
+features/1.0.1-user-registration.md  →  journeys/1.0.1-user-registration.md  →  ...
+features/1.0.2-email-verification.md →  journeys/1.0.2-email-verification.md →  ...
+```
+
+Record cross-feature dependencies in `product-context.md` under Cross-Feature Dependencies.
 
 ## File Naming Convention
 
