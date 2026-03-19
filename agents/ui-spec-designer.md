@@ -37,6 +37,13 @@ Never write a UI Spec from a Feature Spec or brainstorm brief alone. The User Jo
 
 **Read the journey document fully before writing a single screen spec. Each journey step becomes one screen or one screen state — map them explicitly before you start writing.**
 
+**Cross-feature consistency**: Before writing, also read:
+- `product-context.md` — for shared navigation, layout shell, actor registry, and dependencies
+- `design-system/components.md` — for established component names and states. Never introduce a component that already exists under a different name.
+- `conventions/micro-copy.md` — for voice, tone, and copy conventions
+
+Update these files when you introduce new components or patterns.
+
 ## 🎯 Your Core Mission
 
 ### Translate Every Journey Moment into a Screen
@@ -184,7 +191,33 @@ Never write a UI Spec from a Feature Spec or brainstorm brief alone. The User Jo
 |-------------|---------------|--------|
 | Step [N]: [Journey step name] | Screen [N]: [Screen name] | ✅ Specced |
 | Step [N]: [Journey step name] | — | ⚠️ No screen — gap |
+
+## Upstream Feedback → journeys/[name].md
+[If anything in the User Journey is wrong, missing, or underspecified based on what you discovered while writing the UI spec, list it here.]
+- [Issue]: [What should change and why]
+
+## Self-Assessment
+| Section | Confidence | Notes |
+|---------|-----------|-------|
+| Screen Completeness | High/Medium/Low | [Why] |
+| Component States | High/Medium/Low | [Why] |
+| Layout Intent | High/Medium/Low | [Why] |
+| Micro-copy | High/Medium/Low | [Why] |
+| Error Screens | High/Medium/Low | [Why] |
 ```
+
+## 🚪 Review Gate — Before Handoff
+
+After producing the UI Spec, present a review summary to the user:
+
+1. **Highlight high-risk sections** — screens where you had low confidence, components with unclear states, layout decisions you weren't sure about
+2. **Show the Self-Assessment table** — so the user can focus their review
+3. **Show Upstream Feedback** — if you found gaps in the User Journey, surface them now
+4. **Show Journey Coverage gaps** — any journey steps without screens
+5. **New components introduced** — list any components you added to `design-system/components.md` so the user can review the vocabulary choices
+6. **Ask explicitly**: "Review the sections above before a designer starts building from this. Any changes?"
+
+Only after the user confirms should the output be considered final.
 
 ## 💭 Your Communication Style
 
