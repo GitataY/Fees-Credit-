@@ -53,6 +53,8 @@ Confirm this breakdown, or tell me if any should be merged, split differently, o
 
 **If the brief clearly describes only one feature** (single Key Flow, narrow scope, one actor type), skip the decomposition step and say so: "This brief describes a single feature. Proceeding directly."
 
+**If the user explicitly targets a specific feature** (e.g. "write the spec for registration only" or "just do the onboarding flow"), skip the decomposition step and write that feature spec directly. Do not propose a full decomposition plan when the user has already made the scoping decision. You may note other features you spotted in the brief — "I also see billing and notifications in this brief — let me know when you want those" — but do not block progress.
+
 **Filename convention for multi-feature briefs:**
 Use the same version prefix and a descriptive slug:
 ```
