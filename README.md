@@ -15,18 +15,20 @@ The agents don't write code — they write the specifications, user journeys, an
 ## The Pipeline
 
 ```
-Product decisions / requirements
-           ↓
+  ┌─────────────────────┐
+  │  Idea Brainstormer  │  →  brainstorms/[name].md  (Product Brief)
+  └────────┬────────────┘
+           │ required input ↓
   ┌─────────────────┐
   │  Specs Writer   │  →  features/[name].md   (Feature Spec)
   │                 │  →  specs/[name].md       (BDD Spec)
   └────────┬────────┘
-           ↓
+           │ required input ↓
   ┌─────────────────────┐
   │  UX Journey         │  →  journeys/[name].md  (User Journey)
   │  Designer           │
   └────────┬────────────┘
-           ↓
+           │ required input ↓
   ┌─────────────────────┐
   │  UI Spec            │  →  ui-specs/[name].md  (UI Spec)
   │  Designer           │
@@ -145,11 +147,10 @@ To bypass intentionally: `git commit --no-verify`
 
 ## How to Use
 
-**Before the pipeline** (optional but recommended):
-- Start a conversation with the Idea Brainstormer. It stress-tests your idea and saves a Product Brief to `brainstorms/`. When you're satisfied with the brief, hand it to the Specs Writer to kick off the pipeline.
+The pipeline is strictly ordered. Each agent checks its own preconditions and will stop and redirect if the required upstream file is missing — no skipping stages.
 
-**The pipeline:**
-1. **Spec the feature** — give the Specs Writer your requirements (or a brainstorm brief). It produces the Feature Spec first, BDD spec second.
-2. **Run the journey** — give the UX Journey Designer the Feature Spec. It maps every actor flow into a human narrative.
-3. **Spec the UI** — give the UI Spec Designer the journey. It produces a screen-by-screen spec ready for Figma.
-4. **Commit** — the pre-commit hook ensures you don't drift.
+1. **Brainstorm** — start with the Idea Brainstormer. It produces a Product Brief in `brainstorms/`. This is required before Stage 1 can begin.
+2. **Spec the feature** — give the Specs Writer the brainstorm brief. It produces the Feature Spec and BDD Spec.
+3. **Run the journey** — give the UX Journey Designer the Feature Spec. It maps every actor flow into a human narrative.
+4. **Spec the UI** — give the UI Spec Designer the User Journey. It produces a screen-by-screen spec ready for Figma.
+5. **Commit** — the pre-commit hook ensures you don't drift.

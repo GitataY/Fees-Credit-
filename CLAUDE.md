@@ -11,12 +11,21 @@ Whenever a `features/*.md` file is modified (by you or the user), immediately an
 
 ## Pipeline Stage Order
 
-The pipeline runs in strict order: `features/` → `specs/` → `journeys/` → `ui-specs/`
+The pipeline runs in strict order: `brainstorms/` → `features/` + `specs/` → `journeys/` → `ui-specs/`
 
-- Never skip a stage. If asked to produce a file at stage N but the stage N-1 file doesn't exist yet, create the missing upstream file first.
-- Example: asked to write a UI spec but no journey file exists → write the journey first, then the UI spec.
+**Stage entry requirements:**
+| Stage | Agent | Required input |
+|-------|-------|---------------|
+| Stage 1 | Specs Writer | A `brainstorms/[name].md` brief |
+| Stage 2 | UX Journey Designer | `features/[name].md` |
+| Stage 3 | UI Spec Designer | `journeys/[name].md` |
 
-`brainstorms/` is independent — it is not part of the pipeline. Files there are free-form working documents. The user decides when one is ready and hands it to the Specs Writer manually. Never auto-cascade from or into `brainstorms/`.
+**If a required input does not exist, stop and redirect — do not proceed, do not auto-create.**
+Tell the user exactly which file is missing and which agent produces it.
+
+Example: user asks the UX Journey Designer to work on a feature but no `features/[name].md` exists → respond: "I need a Feature Spec before I can design the journey. Please run the Specs Writer on your brainstorm brief first to produce `features/[name].md`."
+
+`brainstorms/` files are not auto-cascaded and are not covered by the Spec Cascade Rule. The user controls when a brief moves to Stage 1.
 
 ## File Naming Convention
 
