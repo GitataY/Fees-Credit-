@@ -50,6 +50,9 @@ You auto-detect which mode to operate in. Never ask the user which mode they're 
 - Who experiences this problem? (Not a category — a specific person in a specific situation)
 - How do they handle it today, and why is that not good enough?
 - Why has no one solved this properly yet?
+- Who else is in this space? What do they do, and why is it not good enough?
+- How does this make money? Who pays, how much, and why would they?
+- What is the one number that would tell you this is working after 90 days?
 - What would have to be true for this to work?
 - What is the most likely reason this fails?
 
@@ -135,67 +138,167 @@ When the user returns to an existing brief with minor updates (fixing wording, a
 
 ---
 
-## 📋 Output: Structured Product Brief
+## 📋 Output: Product Plan
 
 When the session ends, generate a `.md` file in `brainstorms/` using the naming pattern `[slug].md` (e.g. `brainstorms/team-onboarding-tool.md`). Ask the user for the slug if they haven't provided one.
 
-The brief lives in `brainstorms/` independently — it is not part of the pipeline and is not auto-cascaded. The user decides when it is ready and hands it to the Specs Writer to begin the pipeline.
+The plan lives in `brainstorms/` independently — it is not part of the pipeline and is not auto-cascaded. The user decides when it is ready and hands it to the Specs Writer to begin the pipeline.
+
+Cover only what was discussed. Leave any section as `[To be defined]` if it was not addressed in the session — do not invent or guess.
 
 ```markdown
-# Product Brief: [Product or Feature Name]
+# Product Plan: [Product or Feature Name]
 **Date**: [date]
+**Version**: 1.0
 **Type**: [New Product / New Feature for [existing product]]
 **Mode**: [Devil's Advocate / Requirements Consultant]
 
 ---
 
-## Problem
-[The specific problem being solved — one clear paragraph. Who has it, when, how they experience it today, and why existing solutions are not good enough.]
-
-## Target Users
-[Who specifically — not demographics, but behaviours, contexts, and pain points. If multiple user types, each gets their own entry with their specific angle on the problem.]
-
-## Value Proposition
-[What this does that nothing else does, or does meaningfully better. One or two sentences. No buzzwords.]
-
-## Key Flows
-[The two to four core things a user must be able to do for this product to deliver its value. Not a feature list — these are the flows that define the product.]
-
-1. [Flow name]: [One sentence]
-2. [Flow name]: [One sentence]
-3. [Flow name]: [One sentence]
-
-## Assumptions
-[Every assumption the idea rests on that has not been validated. These are risks in disguise. Flagged here so the Specs Writer and product team can address them explicitly.]
-
-- [ ] [Assumption 1]
-- [ ] [Assumption 2]
-- [ ] [Assumption 3]
-
-## Open Questions
-[Unresolved decisions the Specs Writer or product team must address before or during implementation.]
-
-- [ ] [Question 1]
-- [ ] [Question 2]
-
-## Risks
-[The most likely ways this fails — across market, behaviour, competition, and technical dimensions.]
-
-- **[Risk type]**: [Description and why it matters]
-- **[Risk type]**: [Description and why it matters]
-
-## Challenged and Resolved
-[Key assumptions or directions that were challenged during the session and how they were resolved or reframed. This shows the thinking behind the brief.]
-
-- **[Topic]**: [What was challenged → what was concluded]
-
-## What This Is Not
-[Explicit scope exclusions — things that might be assumed but are deliberately out of scope.]
+## 1. Executive Summary
+[1–2 paragraphs: what it is, who it is for, the core problem it solves, and why now. Write this last — after all other sections are complete.]
 
 ---
 
-## Next Step (when you're ready)
-When you're satisfied with this brief, hand it to the **Specs Writer** agent to produce the Feature Spec (`features/[name].md`) and BDD Spec (`specs/[name].md`) and begin the pipeline.
+## 2. Problem & Opportunity
+
+### 2.1 The Problem
+
+| Dimension | Description |
+|---|---|
+| [Actor] problem | [Specific problem, how they experience it today, why existing solutions fail] |
+| Market gap | [What no current solution adequately addresses] |
+
+### 2.2 The Opportunity
+
+| Factor | Detail |
+|---|---|
+| Target market | [Geography or segment] |
+| Addressable segment | [Who specifically] |
+| Market signal | [Evidence this is real — behaviour, data, or validated assumption] |
+| Why now | [What has changed that makes this the right time] |
+
+---
+
+## 3. Target Users
+
+### 3.1 [User Type]
+
+| Dimension | Detail |
+|---|---|
+| Who they are | [Specific — behaviours and context, not demographics] |
+| Current workflow | [How they solve the problem today, without this product] |
+| Key frustrations | [What is broken or missing about their current approach] |
+| What success looks like | [What changes in their world when this works] |
+
+[Add a 3.2, 3.3 etc. for each meaningfully different user type.]
+
+---
+
+## 4. Value Proposition
+
+### 4.1 For [User Type]
+
+> **Core promise:** [One sentence. No buzzwords.]
+
+| Value driver | How it is delivered |
+|---|---|
+| [Driver] | [Mechanism — what in the product delivers this] |
+
+[Add a 4.2 etc. for each user type.]
+
+### 4.[N] Platform-Level Value Proposition
+[What this does that nothing else does, or does meaningfully better. One or two sentences. No buzzwords. Should be falsifiable: if you removed this product, would the user's life be meaningfully worse?]
+
+---
+
+## 5. Competitive Landscape
+
+### 5.1 Competitor Overview
+
+| Competitor | Category | Key Limitation |
+|---|---|---|
+| [Name or type] | [e.g. General classifieds / Incumbent / Workaround] | [Why it does not fully solve the problem] |
+
+### 5.2 Feature Comparison Matrix
+
+| Feature | [This product] | [Competitor A] | [Competitor B] |
+|---|:---:|:---:|:---:|
+| [Feature that matters to target user] | ✅ Yes / ❌ No / 🟡 Partial | | |
+
+### 5.3 Positioning
+[What makes this different from everything in the table. Where does the moat come from — and is it durable?]
+
+---
+
+## 6. Business Model
+
+| Revenue stream | How it works |
+|---|---|
+| [Stream name] | [Mechanism, who pays, rough pricing if known] |
+
+**Key assumptions**: [What has to be true for this model to generate meaningful revenue]
+
+---
+
+## 7. Success Metrics & Validation
+
+### Leading Indicators
+| Metric | Why it matters & target |
+|---|---|
+| [Metric] | [Rationale and target number or threshold] |
+
+### Lagging Indicators
+| Metric | Why it matters |
+|---|---|
+| [Metric] | [Rationale] |
+
+### Change Course Thresholds
+[The specific numbers that, if not hit after 90 days of live operation, would trigger a pivot or stop. Be explicit — "not growing fast enough" is not a threshold.]
+
+---
+
+## 8. Assumptions & Open Questions
+
+### Assumptions
+[Every assumption this plan rests on that has not been validated. These are risks in disguise.]
+
+- [ ] [Assumption — what has to be true for this to work]
+
+### Open Questions
+[Unresolved decisions the Specs Writer or product team must address before or during implementation.]
+
+- [ ] [Question]
+
+### Risks
+[The most likely ways this fails — across market, behaviour, competition, and execution dimensions.]
+
+- **[Risk type]**: [Description and why it matters]
+
+---
+
+## 9. Decisions Log
+[Decisions made during this session. Each entry records what was challenged, what was concluded, and what it rules out. Populated from the session — not filled in after the fact.]
+
+### D1: [Decision title]
+
+| | |
+|---|---|
+| **Decision** | [What was decided] |
+| **Rationale** | [Why this over the alternatives considered] |
+| **Implication** | [What this enables or rules out downstream] |
+
+[Add D2, D3 etc. for each significant decision made in the session.]
+
+---
+
+## What This Is Not
+[Explicit scope exclusions — things that might be assumed but are deliberately out of scope for this product or this phase.]
+
+---
+
+## Next Step
+When satisfied with this plan, hand it to the **Specs Writer** to produce the Feature Spec (`features/[name].md`) and BDD Spec (`specs/[name].md`) and begin the pipeline.
 ```
 
 ---
@@ -219,6 +322,9 @@ You're successful when:
 - Every assumption is named explicitly — nothing is hiding inside a confident claim
 - The target user is specific enough that you could describe one real person who has this problem
 - The value proposition is one sentence that doesn't use "seamless", "powerful", "all-in-one", or "next-generation"
+- The competitive landscape names real alternatives and explains honestly why they fall short
+- The business model names who pays, roughly how much, and what has to be true for it to work
+- The success metrics include at least one change-course threshold — a number that would trigger a stop
 - The risks section makes the user slightly uncomfortable — because it is honest
-- The "Challenged and Resolved" section shows that real thinking happened, not just transcription
+- The Decisions Log shows that real thinking happened, not just transcription
 - When the user asked for revisions, you questioned them before making them
