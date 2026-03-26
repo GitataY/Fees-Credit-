@@ -1,214 +1,110 @@
-# PM Agentic Workflow
+# Zeraki Pledge & Credit
 
-A structured pipeline of AI agent definitions that transform product ideas into implementation-ready artifacts — stage by stage, with no ambiguity left for developers to resolve.
-
----
-
-## What This Is
-
-This repo defines a **product management pipeline powered by AI agents**. Each agent has a precise role, a defined input, and a defined output. Together they form an assembly line: raw product thinking goes in one end, fully-specced UI blueprints and technical plans come out the other.
-
-The agents don't write code — they write the specifications, user journeys, screen blueprints, and technical specs that eliminate the gap between "we decided to build X" and "a developer can start building X today."
+A two-layer product built on top of Zeraki Finance that turns informal verbal fee pledges into structured instalment plans — and uses the behavioural data those plans generate to offer eligible parents affordable school fee credit through an embedded lending partner.
 
 ---
 
-## The Pipeline
+## The Problem
 
-```
-  ┌─────────────────────┐
-  │  Idea Brainstormer   │  →  brainstorms/[name].md  (Product Brief)
-  └────────┬─────────────┘
-           │ required input ↓
-  ┌─────────────────┐
-  │  Specs Writer    │  →  features/[name].md   (Feature Spec)
-  │                  │  →  specs/[name].md       (BDD Spec)
-  └────────┬─────────┘
-           │ required input ↓
-  ┌─────────────────────┐
-  │  UX Journey          │  →  journeys/[name].md  (User Journey)
-  │  Designer            │
-  └────────┬─────────────┘
-           │ required input ↓
-  ┌─────────────────────┐
-  │  UI Spec             │  →  ui-specs/[name].md  (UI Spec)
-  │  Designer            │
-  └────────┬─────────────┘
-           │ required input ↓
-  ┌─────────────────────┐
-  │  Technical Spec      │  →  tech-specs/[name].md  (Technical Spec)
-  │  Writer              │
-  └──────────────────────┘
-```
+When a parent can't pay full school fees on Day 1 of term, they negotiate verbally at the school gate. The bursar records the commitment in a notebook. When the parent misses the informal deadline, the child gets sent home.
 
-Each agent checks its own preconditions and will **stop and redirect** if the required upstream file is missing — no skipping stages.
+Zeraki Finance already has a pledge feature — but it's a digital notebook entry, not a workflow. There's no structured plan, no automated tracking, no adherence monitoring. Parents who need to bridge the gap borrow from Tala or shylocks at 15–20% monthly interest.
 
 ---
 
-## Getting Started
+## The Product
 
-### Prerequisites
+### Layer 1 — Instalment Plans
+Turns the existing pledge record into a real payment plan: scheduled instalments, automated SMS reminders, adherence tracking, and a bursar dashboard showing expected vs. actual fee collection. Included in the existing Zeraki Finance school subscription.
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI installed
-- This repo cloned locally
+**School value**: fees arrive faster, bursars stop chasing parents with a notebook.
+**Parent value**: structured flexibility, child never sent home, no gate negotiation.
 
-### How to Invoke Each Agent
+### Layer 2 — Fee Top-Up Credit
+Uses multi-term payment history from Layer 1 (and existing Zeraki Finance data) to identify credit-eligible parents. Eligible parents receive a "fee support" offer — credit disbursed directly to the school's paybill at ~5% flat, repaid automatically through a waterfall built into the parent's existing fee payment flow.
 
-Each agent is defined as a custom agent in `agents/`. You invoke them from Claude Code by name:
+**Parent value**: affordable credit vs. 15%+ monthly from digital lenders, no new repayment behaviour required.
+**Zeraki value**: data and distribution fee per arrangement, zero credit risk.
+
+---
+
+## How the Waterfall Works
+
+1. Parent accepts a fee top-up offer (two-step explicit consent)
+2. Lending partner (e.g. Pezesha) disburses directly to the school's paybill
+3. School is made whole — child stays in school
+4. As the parent pays future fees to the same paybill, Zeraki's system automatically splits each payment: lender's repayment share → B2B transfer to partner; remainder → stays with school
+5. Parent repays by doing exactly what they always do: paying school fees
+
+---
+
+## Credit Eligibility
+
+Two groups qualify for Layer 2:
+
+| Group | Signal |
+|---|---|
+| Long-term payer | 6+ terms of consistent on-time payment history in Zeraki Finance |
+| Layer 1 adherent | On an instalment plan with 75%+ payment adherence before a late-term disruption |
+
+The model distinguishes **deviation from pattern** — a parent with 6 clean terms and one crisis term is statistically low-risk. This is the data insight Tala and standalone lenders cannot replicate.
+
+---
+
+## Business Model
+
+| Layer | Revenue |
+|---|---|
+| Layer 1 | None — included in existing school subscription. Strategic value: moat, stickiness, data generation. |
+| Layer 2 | 1–2% data and distribution fee per credit arrangement. Zeraki holds zero credit risk. |
+
+At 1,000 schools opted in, ~50 arrangements per term at KES 4,000 average: **KES 9M/year**. Full 4,000-school penetration: **KES 36M/year**. Scales further with geographic expansion.
+
+---
+
+## Competitive Moat
+
+Zeraki's position as the data and distribution layer is protected by four things that cannot be replicated independently:
+
+1. **Distribution** — 4,000+ schools built over 10 years through teacher-facing tools, not a lending product
+2. **Operational data** — multi-term payment history, pledge fulfilment records, and plan adherence data generated as a byproduct of daily bursar use
+3. **School trust** — SMS messages arrive from the school's sender ID; parents see the school, not the platform
+4. **Settlement infrastructure** — paybill integration already exists for fee receipting; the waterfall requires no new integrations
+
+A lender cannot replicate all four without becoming a school management company.
+
+---
+
+## Success Metrics
+
+**90-day go/no-go metric**: Plan adherence rate
+**Target**: 65%+ of parents on a Layer 1 plan make all scheduled payments on time
+**Gate**: Below 40% — fix Layer 1 before investing in Layer 2
+
+---
+
+## Pipeline Status
+
+| Stage | File | Status |
+|---|---|---|
+| Brainstorm | `brainstorms/zeraki-pledge-credit.md` | ✅ Complete |
+| Feature Spec | `features/zeraki-pledge-credit.md` | Not started |
+| BDD Spec | `specs/zeraki-pledge-credit.md` | Not started |
+| User Journey | `journeys/zeraki-pledge-credit.md` | Not started |
+| UI Spec | `ui-specs/zeraki-pledge-credit.md` | Not started |
+| Technical Spec | `tech-specs/zeraki-pledge-credit.md` | Not started |
+
+**Next step**: Run the Specs Writer on `brainstorms/zeraki-pledge-credit.md` to produce the Feature Spec and BDD Spec.
 
 ```bash
-# Start a brainstorm session
-claude "Use the Idea Brainstormer agent. I have an idea for a team onboarding tool."
-
-# After brainstorm is ready — generate the feature spec
-claude "Use the Specs Writer agent on brainstorms/team-onboarding-tool.md"
-
-# After feature spec is confirmed — design the user journey
-claude "Use the UX Journey Designer agent on features/1.0.1-team-onboarding.md"
-
-# After journey is confirmed — produce the UI spec
-claude "Use the UI Spec Designer agent on journeys/1.0.1-team-onboarding.md"
-
-# After UI spec is confirmed — produce the technical spec
-claude "Use the Technical Spec Writer agent on ui-specs/1.0.1-team-onboarding.md"
-```
-
-### The Review Gate
-
-Every agent (except the Brainstormer) presents a **review summary** before its output is considered done:
-- A self-assessment showing confidence levels per section
-- Upstream feedback — issues discovered in the input files
-- Coverage gaps — BDD scenarios or journey steps that aren't covered
-
-**Review the output and confirm before moving to the next stage.** The agent will ask you explicitly.
-
----
-
-## Pipeline Stages
-
-### Stage 0 — Idea Brainstormer (Independent)
-
-The Brainstormer sits outside the strict pipeline. It is a conversational agent — you talk through an idea or requirements, and it produces a structured **Product Brief** in `brainstorms/`. When you are satisfied, you hand it to the Specs Writer.
-
-**Two modes — auto-detected:**
-- **Devil's Advocate** — for new ideas you're still forming. Challenges hard, but respects a challenge budget (2-3 rounds per topic, then records the concern and moves on).
-- **Expert Consultant** — for defined requirements. Asks deep questions, proposes improvements, flags risks.
-- **Quick Update** — for minor revisions to existing briefs. Makes the change directly without re-entering challenge mode.
-
-### Stage 1 — Specs Writer
-
-Turns product decisions into two documents:
-- **Feature Spec** (`features/`) — what, why, actors, flows, business rules, data contracts
-- **BDD Spec** (`specs/`) — Gherkin scenarios covering every behavior, edge case, error path
-
-Feature Spec always comes first. BDD scenarios are written once the Feature Spec is confirmed.
-
-### Stage 2 — UX Journey Designer
-
-Reads the Feature Spec and produces a **User Journey** (`journeys/`) — a step-by-step narrative of every actor's experience: Before (trigger & context), During (screen by screen with friction resolution), After (real-world outcome). Includes a BDD Coverage Check.
-
-### Stage 3 — UI Spec Designer
-
-Reads the User Journey and produces a **UI Spec** (`ui-specs/`) — screen-by-screen specification with layout intent, component inventory, component states, exact micro-copy, and transitions. Written precisely enough for a Figma designer to build without questions.
-
-### Stage 4 — Technical Spec Writer
-
-Reads the UI Spec + Feature Spec and produces a **Technical Spec** (`tech-specs/`) — API contracts, data model changes, integration points, security & performance considerations, and a phased implementation plan. Bridges the gap between "what to build" and "how to build it."
-
----
-
-## Directory Structure
-
-```
-pm-agentic-workflow/
-├── agents/                     ← Agent definitions (system prompts)
-│   ├── idea-brainstormer.md
-│   ├── specs-writer.md
-│   ├── ux-journey-designer.md
-│   ├── ui-spec-designer.md
-│   └── technical-spec-writer.md
-│
-├── brainstorms/                ← Stage 0: Product Briefs (independent)
-├── features/                   ← Stage 1: Feature Specs
-├── specs/                      ← Stage 1: BDD Specs
-├── journeys/                   ← Stage 2: User Journey narratives
-├── ui-specs/                   ← Stage 3: UI Specifications
-├── tech-specs/                 ← Stage 4: Technical Specifications
-│
-├── product-context.md          ← Cross-feature: shared patterns, actors, dependencies
-├── design-system/
-│   └── components.md           ← Cross-feature: canonical component vocabulary
-├── conventions/
-│   ├── micro-copy.md           ← Cross-feature: voice, tone, copy patterns
-│   ├── bdd-conventions.md      ← Cross-feature: Gherkin writing standards
-│   └── journey-patterns.md     ← Cross-feature: trigger, friction, outcome patterns
-│
-├── sync-reports/               ← Drift detection reports (auto-generated)
-├── designs/                    ← Pencil.dev design files (.pen)
-│
-├── CLAUDE.md                   ← Pipeline rules and agent instructions
-└── README.md
+claude "Use the Specs Writer agent on brainstorms/zeraki-pledge-credit.md"
 ```
 
 ---
 
-## Cross-Feature Consistency
+## Key Open Questions Before Specs
 
-### The Problem
-Each feature goes through the pipeline independently, but real products need consistency — same component names, same copy patterns, same actors across features.
-
-### The Solution
-Shared context files that every agent reads and updates:
-
-| File | What it ensures | Updated by |
-|------|----------------|------------|
-| `product-context.md` | Same actors, same navigation, same global rules | All agents |
-| `design-system/components.md` | Same component names and states across all UI specs | UI Spec Designer |
-| `conventions/micro-copy.md` | Same voice, tone, CTA patterns, error messages | UX Journey Designer, UI Spec Designer |
-| `conventions/bdd-conventions.md` | Same Gherkin step style across all BDD specs | Specs Writer |
-| `conventions/journey-patterns.md` | Same trigger and friction patterns across journeys | UX Journey Designer |
-
-**Rule**: Before introducing anything new (component, actor, copy pattern), check the relevant file. If it exists, use it. If it doesn't, add it.
-
----
-
-## Feedback Loops
-
-### Forward: Drift Detection (replaces auto-cascade)
-
-When a `features/*.md` file is modified, the system generates a **drift report** in `sync-reports/` listing which downstream files are affected and whether the change is mechanical or requires human judgment. You decide what to update.
-
-### Backward: Upstream Feedback
-
-Every agent (Specs Writer, UX Journey Designer, UI Spec Designer, Technical Spec Writer) includes an **Upstream Feedback** section in its output. When a downstream agent discovers a gap or inconsistency in the input file, it records the issue and proposed fix. You review and decide whether to update the upstream file.
-
-### Git Pre-commit Hook
-
-When committing changes to `features/*.md`, the hook checks whether downstream files exist but aren't staged. Blocks the commit with a warning. Bypass with `git commit --no-verify`.
-
----
-
-## File Naming Convention
-
-Every output file shares the exact same filename across all directories:
-
-```
-features/1.0.1-customer-registration.md
-specs/1.0.1-customer-registration.md
-journeys/1.0.1-customer-registration.md
-ui-specs/1.0.1-customer-registration.md
-tech-specs/1.0.1-customer-registration.md
-```
-
-This makes tracing any screen, behavior, or API endpoint back to its origin spec a single lookup.
-
----
-
-## Feature Scope Guidelines
-
-- **One feature = one coherent user goal.** If an actor can accomplish it without touching another feature, it's correctly scoped.
-- **Split at ~8-10 screens.** UI specs with 15+ screens are too large to review.
-- **Split when actors diverge completely.** If customer and admin share zero screens, they're separate features.
-- **Shared screens**: The feature that owns the screen's primary purpose owns its spec. Others reference it.
-- **One brainstorm → multiple features**: The Specs Writer produces separate feature specs. Dependencies are recorded in `product-context.md`.
-
-See CLAUDE.md for the full scoping rules.
+1. **Pezesha partnership** — validate structural fit in a direct conversation before building Layer 2 infrastructure
+2. **Consent UX** — resolve the tone gap between "fee support" entry language and the CRB-disclosure consent screen
+3. **Regulatory** — confirm Zeraki's role under Kenya's Digital Credit Provider Regulations 2022 and Data Protection Act 2019
+4. **Child transfer** — define the handling for waterfall breakage when a child transfers schools mid-repayment
