@@ -88,16 +88,21 @@ A lender cannot replicate all four without becoming a school management company.
 | Stage | File | Status |
 |---|---|---|
 | Brainstorm | `brainstorms/zeraki-pledge-credit.md` | ✅ Complete |
-| Feature Spec | `features/zeraki-pledge-credit.md` | Not started |
-| BDD Spec | `specs/zeraki-pledge-credit.md` | Not started |
-| User Journey | `journeys/zeraki-pledge-credit.md` | Not started |
-| UI Spec | `ui-specs/zeraki-pledge-credit.md` | Not started |
-| Technical Spec | `tech-specs/zeraki-pledge-credit.md` | Not started |
+| Feature Spec — Layer 1 | `features/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
+| Feature Spec — Layer 2 | `features/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
+| BDD Spec — Layer 1 | `specs/1.0.1-zeraki-instalment-plans.md` | Not started |
+| BDD Spec — Layer 2 | `specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
+| User Journey — Layer 1 | `journeys/1.0.1-zeraki-instalment-plans.md` | Not started |
+| User Journey — Layer 2 | `journeys/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
+| UI Spec — Layer 1 | `ui-specs/1.0.1-zeraki-instalment-plans.md` | Not started |
+| UI Spec — Layer 2 | `ui-specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
+| Technical Spec — Layer 1 | `tech-specs/1.0.1-zeraki-instalment-plans.md` | Not started |
+| Technical Spec — Layer 2 | `tech-specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
 
-**Next step**: Run the Specs Writer on `brainstorms/zeraki-pledge-credit.md` to produce the Feature Spec and BDD Spec.
+**Next step**: Confirm both Feature Specs, then run the UX Journey Designer on `features/1.0.1-zeraki-instalment-plans.md`.
 
 ```bash
-claude "Use the Specs Writer agent on brainstorms/zeraki-pledge-credit.md"
+claude "Use the UX Journey Designer on features/1.0.1-zeraki-instalment-plans.md"
 ```
 
 ---
