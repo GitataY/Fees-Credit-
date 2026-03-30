@@ -58,3 +58,15 @@ Shared voice, tone, and copy patterns that all journey and UI spec agents must f
 | Context | Copy | Used in |
 |---------|------|---------|
 | _Example: Email validation error_ | _"Please enter a valid email address"_ | _1.0.1-customer-registration_ |
+| Credit offer SMS | `[School]: Based on [Student]'s payment record, you may qualify for fee support this term. Reply FEES to see your offer, or ignore to skip.` | J3, 1.0.2 |
+| AT_RISK notification SMS | `[School]: Your fee top-up balance for [Student] remains outstanding. The credit partner may contact you about the remaining balance.` | J8, 1.0.2 |
+| Consent Step 1 SMS | `[School] fee top-up: [Student]'s payment history will be shared with our credit partner. Repayments reported to credit bureaus. Reply YES to continue or NO to cancel.` | J3, 1.0.2 |
+| Consent Step 2 SMS | `Confirm: KES [amount] fee top-up for [Student]. ~KES [amount]/[week or month] from your future fee payments. Reply CONFIRM to accept.` | J3, 1.0.2 |
+| Offer accepted / disbursed SMS | `[School]: KES [amount] fee top-up confirmed for [Student] and credited to the school. Repayment starts from your next fee payment. Pay to [paybill] as usual.` | J2, J3, 1.0.2 |
+| Waterfall payment applied SMS | `[School]: KES [amount] received for [Student]. KES [repayment] applied to fee top-up. Remaining: KES [balance]. School fees: KES [fee_credit] credited.` | J6, 1.0.2 |
+| Waterfall — full payment to repayment edge | `[School]: KES [amount] received for [Student]. Full amount applied to your fee top-up balance. Remaining: KES [balance]. School balance unchanged this payment.` | J6 edge, 1.0.2 |
+| Credit completed SMS | `[School]: Your fee top-up for [Student] is fully repaid. Thank you for keeping your commitment.` | J7, 1.0.2 |
+| Offer expired SMS | `[School]: Your fee top-up offer for [Student] has expired. Contact the school if you still need support.` | J5, 1.0.2 |
+| Disbursement failed SMS | `[School]: We could not process your fee top-up at this time. Please contact the school for assistance.` | J10, 1.0.2 |
+| Layer 1 dependency gate (Layer 2 blocked) | `Please enable Instalment Plans first. Fee Top-Up Credit requires instalment plan data to assess eligibility for some parents.` | J1, 1.0.2 |
+| School credit risk clarification | `The school takes no financial risk. The lending partner provides the credit and holds the default risk.` | J1, 1.0.2 |
