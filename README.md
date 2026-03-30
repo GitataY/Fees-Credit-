@@ -92,17 +92,17 @@ A lender cannot replicate all four without becoming a school management company.
 | Feature Spec — Layer 2 | `features/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
 | BDD Spec — Layer 1 | `specs/1.0.1-zeraki-instalment-plans.md` | Not started |
 | BDD Spec — Layer 2 | `specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
-| User Journey — Layer 1 | `journeys/1.0.1-zeraki-instalment-plans.md` | Not started |
-| User Journey — Layer 2 | `journeys/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
+| User Journey — Layer 1 | `journeys/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
+| User Journey — Layer 2 | `journeys/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
 | UI Spec — Layer 1 | `ui-specs/1.0.1-zeraki-instalment-plans.md` | Not started |
 | UI Spec — Layer 2 | `ui-specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
 | Technical Spec — Layer 1 | `tech-specs/1.0.1-zeraki-instalment-plans.md` | Not started |
 | Technical Spec — Layer 2 | `tech-specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
 
-**Next step**: Confirm both Feature Specs, then run the UX Journey Designer on `features/1.0.1-zeraki-instalment-plans.md`.
+**Next step**: Run the UI Spec Designer on `journeys/1.0.1-zeraki-instalment-plans.md`.
 
 ```bash
-claude "Use the UX Journey Designer on features/1.0.1-zeraki-instalment-plans.md"
+claude "Use the UI Spec Designer on journeys/1.0.1-zeraki-instalment-plans.md"
 ```
 
 ---
