@@ -92,8 +92,8 @@ A lender cannot replicate all four without becoming a school management company.
 | Brainstorm | `brainstorms/zeraki-pledge-credit.md` | ✅ Complete |
 | Feature Spec — Layer 1 | `features/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
 | Feature Spec — Layer 2 | `features/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
-| BDD Spec — Layer 1 | `specs/1.0.1-zeraki-instalment-plans.md` | Not started |
-| BDD Spec — Layer 2 | `specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
+| BDD Spec — Layer 1 | `specs/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
+| BDD Spec — Layer 2 | `specs/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
 | User Journey — Layer 1 | `journeys/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
 | User Journey — Layer 2 | `journeys/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
 | UI Spec — Layer 1 | `ui-specs/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
@@ -101,17 +101,24 @@ A lender cannot replicate all four without becoming a school management company.
 | Technical Spec — Layer 1 | `tech-specs/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
 | Technical Spec — Layer 2 | `tech-specs/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
 
-**Next step**: Run the Specs Writer on both feature specs to produce BDD specs in `specs/`.
-
-```bash
-claude "Use the Specs Writer on features/1.0.1-zeraki-instalment-plans.md"
-```
+The full pipeline is complete. All specs are ready for engineering handoff.
 
 ---
 
-## Key Open Questions Before Specs
+## Key Open Questions Before Engineering Handoff
 
-1. **Pezesha partnership** — validate structural fit in a direct conversation before building Layer 2 infrastructure
-2. **Consent UX** — two-step progressive disclosure flow with version tracking is designed; remaining dependency is legal review of the consent text (OQ-13)
-3. **Regulatory** — confirm Zeraki's role under Kenya's Digital Credit Provider Regulations 2022 and Data Protection Act 2019
-4. **Child transfer** — AT_RISK state with lending partner notification and bridging SMS is designed; remaining dependency is the detection mechanism for mid-term school transfer (OQ-10)
+The following questions must be resolved before development begins. Each blocks a specific part of the implementation.
+
+### Blocks Layer 2 entirely
+1. **Pezesha partnership** — validate structural fit, API contract, and commercial terms (fee rate, disbursement flow, repayment data exchange) in a direct conversation before building any Layer 2 infrastructure. This is the single most critical unvalidated assumption in the product.
+
+### Blocks Layer 2 go-live
+2. **Consent text legal review** — two-step progressive disclosure flow with version tracking is designed (OQ-13); consent version 1.0 cannot go live without sign-off against CBK Digital Credit Provider Regulations 2022 and Kenya Data Protection Act 2019.
+3. **Regulatory classification** — confirm Zeraki's role under the same regulations. Zeraki is the data and routing layer, not the lender — but this must be formally confirmed.
+
+### Blocks Layer 2 reliability
+4. **Child transfer detection** — AT_RISK state with lending partner notification and bridging SMS is designed (OQ-10); the remaining dependency is the detection mechanism (withdrawal event in Zeraki Finance vs. inactivity-based detection).
+
+### Blocks Layer 1 go-live
+5. **Inbound SMS infrastructure** — confirm whether Zeraki has an existing inbound SMS short code or long number, and whether it is shared across schools or per-school (OQ-06). Path B (PLAN and BAL keywords) depends on this.
+6. **Parent app existence** — confirm whether the Zeraki parent app is an existing product or a new build (OQ-05). Path A (app-initiated plan requests) is a significant scope addition if it requires a new build.
