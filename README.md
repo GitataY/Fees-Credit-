@@ -44,7 +44,7 @@ Two groups qualify for Layer 2:
 
 | Group | Signal |
 |---|---|
-| Long-term payer | 6+ terms of consistent on-time payment history in Zeraki Finance |
+| Long-term payer | Strong multi-term payment history in Zeraki Finance (average payment speed score ≥ 90) |
 | Layer 1 adherent | On an instalment plan with 75%+ payment adherence before a late-term disruption |
 
 The model distinguishes **deviation from pattern** — a parent with 6 clean terms and one crisis term is statistically low-risk. This is the data insight Tala and standalone lenders cannot replicate.
@@ -59,6 +59,8 @@ The model distinguishes **deviation from pattern** — a parent with 6 clean ter
 | Layer 2 | 1–2% data and distribution fee per credit arrangement. Zeraki holds zero credit risk. |
 
 At 1,000 schools opted in, ~50 arrangements per term at KES 4,000 average: **KES 9M/year**. Full 4,000-school penetration: **KES 36M/year**. Scales further with geographic expansion.
+
+This is a high-margin recurring line within Zeraki's subscription business — not the entire revenue model.
 
 ---
 
@@ -94,15 +96,15 @@ A lender cannot replicate all four without becoming a school management company.
 | BDD Spec — Layer 2 | `specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
 | User Journey — Layer 1 | `journeys/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
 | User Journey — Layer 2 | `journeys/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
-| UI Spec — Layer 1 | `ui-specs/1.0.1-zeraki-instalment-plans.md` | Not started |
-| UI Spec — Layer 2 | `ui-specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
-| Technical Spec — Layer 1 | `tech-specs/1.0.1-zeraki-instalment-plans.md` | Not started |
-| Technical Spec — Layer 2 | `tech-specs/1.0.2-zeraki-fee-top-up-credit.md` | Not started |
+| UI Spec — Layer 1 | `ui-specs/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
+| UI Spec — Layer 2 | `ui-specs/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
+| Technical Spec — Layer 1 | `tech-specs/1.0.1-zeraki-instalment-plans.md` | ✅ Complete |
+| Technical Spec — Layer 2 | `tech-specs/1.0.2-zeraki-fee-top-up-credit.md` | ✅ Complete |
 
-**Next step**: Run the UI Spec Designer on `journeys/1.0.1-zeraki-instalment-plans.md`.
+**Next step**: Run the Specs Writer on both feature specs to produce BDD specs in `specs/`.
 
 ```bash
-claude "Use the UI Spec Designer on journeys/1.0.1-zeraki-instalment-plans.md"
+claude "Use the Specs Writer on features/1.0.1-zeraki-instalment-plans.md"
 ```
 
 ---
@@ -110,6 +112,6 @@ claude "Use the UI Spec Designer on journeys/1.0.1-zeraki-instalment-plans.md"
 ## Key Open Questions Before Specs
 
 1. **Pezesha partnership** — validate structural fit in a direct conversation before building Layer 2 infrastructure
-2. **Consent UX** — resolve the tone gap between "fee support" entry language and the CRB-disclosure consent screen
+2. **Consent UX** — two-step progressive disclosure flow with version tracking is designed; remaining dependency is legal review of the consent text (OQ-13)
 3. **Regulatory** — confirm Zeraki's role under Kenya's Digital Credit Provider Regulations 2022 and Data Protection Act 2019
-4. **Child transfer** — define the handling for waterfall breakage when a child transfers schools mid-repayment
+4. **Child transfer** — AT_RISK state with lending partner notification and bridging SMS is designed; remaining dependency is the detection mechanism for mid-term school transfer (OQ-10)
